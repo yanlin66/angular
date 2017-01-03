@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script src="node_modules/angular/angular.min.js"></script>
+    <!--
+     双向数据绑定
+     angular 使用方法 jquery
+     自带指令
+     自定义指令
+     ng-app   指定angular接管的区间
+     ng-model 模型->数据 input
+     ng-init  初始化 一些值
+     只要通过指令绑定的数据,天然就是双向数据绑定
+    -->
+</head>
+<body ng-app ng-init="one=0;two=0">
+
+<input type="text" ng-model="one">
++
+<input type="text" ng-model="two">
+=
+<span>{{one*1+two*1}}</span>
+
+</body>
+</html>
