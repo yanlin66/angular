@@ -5,23 +5,24 @@
     <title>Document</title>
     <script src="node_modules/angular/angular.min.js"></script>
     <!--
-     双向数据绑定
-     angular 使用方法 jquery
-     自带指令
-     自定义指令
-     ng-app   指定angular接管的区间
-     ng-model 模型->数据 input
-     ng-init  初始化 一些值
-     只要通过指令绑定的数据,天然就是双向数据绑定
+      模块化开发
+
+      m v c  -> mvvm
+      通过控制器,让相应的数据显示到相应的视图上面
     -->
 </head>
-<body ng-app ng-init="one=0;two=0">
+<body ng-app="myapp">
+    <div ng-controller="ctrl">
+        <input type="text" ng-model="aa">
 
-<input type="text" ng-model="one">
-+
-<input type="text" ng-model="two">
-=
-<span>{{one*1+two*1}}</span>
+        {{aa}}
+    </div>
 
+    <script>
+     angular.module("myapp",[])
+             .controller("ctrl",function($scope){
+                  $scope.aa="123";
+             })
+    </script>
 </body>
 </html>
