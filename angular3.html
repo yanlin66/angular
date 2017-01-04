@@ -3,7 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <title>Document</title>
+    <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     <script src="node_modules/angular/angular.min.js"></script>
+    <script src="filters.js"></script>
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <style>
         .table tr td, .table tr th {
@@ -17,9 +19,9 @@
 
     -->
 </head>
+<div contenteditable="true"></div>
 <body ng-app="myapp">
 <div ng-controller="car">
-
     <!--过滤  将已有的东西通过指定的规则来进行过滤-->
     <div class="text-center" ng-show="data.length==0">
         购物车是空的
@@ -77,12 +79,11 @@
             </td>
         </tr>
     </table>
-
+   {{[1,2,3,4]|minOrmax:"max"}}
 </div>
 </body>
 <script>
-
-  angular.module("myapp",[])
+  angular.module("myapp",["filters"])
           .controller("car",["$scope","$filter",function($scope,$filter){
               $scope.type="";
               $scope.ziduan="price";
