@@ -19,18 +19,30 @@
 </head>
 <body ng-app="myapp">
 <div ng-controller="car">
+
+    <!--过滤  将已有的东西通过指定的规则来进行过滤-->
     <div class="text-center" ng-show="data.length==0">
         购物车是空的
+    </div>
+
+    <div class="input-group input-group-lg" ng-hide="data.length==0">
+        <span class="input-group-addon glyphicon glyphicon-search"></span>
+        <input type="text" class="form-control" placeholder="Username" ng-model="search">
     </div>
     <table class="table table-bordered" ng-hide="data.length==0">
         <tr>
             <th>商品名称</th>
-            <th>商品价格</th>
+            <th>
+                商品价格
+                <div ng-class={dropup:type!==""}  ng-click="order()">
+                   <span class="caret" ></span>
+                </div>
+            </th>
             <th>商品数量</th>
             <th>商品总价</th>
             <th>操作</th>
         </tr>
-        <tr ng-repeat="item in data">
+        <tr ng-repeat="item in data | filter:{name:search}|orderBy:type+ziduan ">
             <td>{{item.name}}</td>
             <td>{{item.price}}</td>
             <td class="text-center">
@@ -66,39 +78,51 @@
         </tr>
     </table>
 
-
 </div>
 </body>
 <script>
 
   angular.module("myapp",[])
-          .controller("car",function($scope){
+          .controller("car",["$scope","$filter",function($scope,$filter){
+              $scope.type="";
+              $scope.ziduan="price";
+
+              $scope.order=function(){
+
+                  if($scope.type==""){
+                      $scope.type="-"
+                  }else{
+                      $scope.type="";
+                  }
+              }
+
               $scope.data=[
                   {
                       id:1,
-                      name:"鞋",
-                      price:100,
+                      name:"鞋5",
+                      price:200,
                       num:1
                   },
                   {
                       id:2,
                       name:"裤子",
-                      price:100,
+                      price:300,
                       num:2
                   },
                   {
                       id:3,
                       name:"上衣",
-                      price:100,
+                      price:150,
                       num:1
                   },
                   {
                       id:4,
                       name:"帽子",
-                      price:100,
+                      price:500,
                       num:1
                   }
               ];
+
 
               $scope.getPrice=function(){
                   var prices=0;
@@ -150,6 +174,6 @@
                   }
 
               }
-          })
+          }])
 </script>
 </html>
